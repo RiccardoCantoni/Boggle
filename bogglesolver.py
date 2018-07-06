@@ -1,9 +1,4 @@
-import networkx as nx
-import numpy as np
-import matplotlib.pyplot as plt
-import datetime
-
-#prefix tree node
+#suffix tree class
 class CharTreeNode:
     
     def __init__(self, parent, char, is_word):
@@ -31,7 +26,7 @@ class CharTreeNode:
             cur = cur.parent
         return path
             
-#prefix tree
+
 class CharTree:   
     def __init__(self, data, size):    
         self.root = CharTreeNode(None, '$', False)
@@ -62,7 +57,7 @@ class CharTree:
             curnode.children = new_children            
 
 
-#graph exploration agent
+#graph exploration agent class
 class ExplorationAgent:
     
     def get_succ(self, cur, adjacency, label_dict):
@@ -103,7 +98,9 @@ class ExplorationAgent:
                     fringe.append(s)
         
         return words
-       
+    
+
+    
     def explore_all(self, msize, char_tree, adjacency, label_dict):            
         words = []
         for i in range(0, msize*msize):
@@ -111,6 +108,15 @@ class ExplorationAgent:
             for x in w:
                 words.append(x)
         return words
+
+
+# In[7]:
+
+
+import networkx as nx
+import numpy as np
+import matplotlib.pyplot as plt
+import datetime
 
 #tester class
 class Tester:
@@ -172,6 +178,10 @@ class Tester:
 class TestResult:
 
     def __init__(self, words_found, num_tests, search_time):
+        sc = [1,1,1,2,3,5,11,11,11,11,11,11,11,11,11]
+        scores = {}
+        for i in range(2,17):
+            scores[i]=sc[i-2]
         self.search_time = search_time
         self.avg_word_num = len(words_found)/num_tests
         num_letters = 0
@@ -180,11 +190,11 @@ class TestResult:
             num_letters = num_letters+len(w)
             tot_score = tot_score+self.score(w)
         self.avg_word_length = num_letters/num_tests
-        self.avg_score = "placeholder. to be defined"
+        self.avg_score = tot_score/len(words_found)
         self.words = words_found
 
-    def score(self, word):
-        return 0
+    def score(self, word, scores):
+        return scores[len(word)]
         
         
 
