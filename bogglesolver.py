@@ -1,10 +1,9 @@
+import networkx as nx
+import numpy as np
+import matplotlib.pyplot as plt
+import datetime
 
-# coding: utf-8
-
-# In[5]:
-
-
-#suffix tree class
+#prefix tree node
 class CharTreeNode:
     
     def __init__(self, parent, char, is_word):
@@ -32,7 +31,7 @@ class CharTreeNode:
             cur = cur.parent
         return path
             
-
+#prefix tree
 class CharTree:   
     def __init__(self, data, size):    
         self.root = CharTreeNode(None, '$', False)
@@ -63,10 +62,7 @@ class CharTree:
             curnode.children = new_children            
 
 
-# In[6]:
-
-
-#graph exploration agent class
+#graph exploration agent
 class ExplorationAgent:
     
     def get_succ(self, cur, adjacency, label_dict):
@@ -107,9 +103,7 @@ class ExplorationAgent:
                     fringe.append(s)
         
         return words
-    
-
-    
+       
     def explore_all(self, msize, char_tree, adjacency, label_dict):            
         words = []
         for i in range(0, msize*msize):
@@ -117,15 +111,6 @@ class ExplorationAgent:
             for x in w:
                 words.append(x)
         return words
-
-
-# In[7]:
-
-
-import networkx as nx
-import numpy as np
-import matplotlib.pyplot as plt
-import datetime
 
 #tester class
 class Tester:
@@ -195,7 +180,7 @@ class TestResult:
             num_letters = num_letters+len(w)
             tot_score = tot_score+self.score(w)
         self.avg_word_length = num_letters/num_tests
-        self.avg_score = "not implemented"
+        self.avg_score = "placeholder. to be defined"
         self.words = words_found
 
     def score(self, word):
