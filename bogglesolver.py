@@ -1,4 +1,4 @@
-#suffix tree class
+#suffix tree node
 class CharTreeNode:
     
     def __init__(self, parent, char, is_word):
@@ -25,8 +25,8 @@ class CharTreeNode:
             path.append(cur.char)
             cur = cur.parent
         return path
-            
-
+    
+#suffix tree           
 class CharTree:   
     def __init__(self, data, size):    
         self.root = CharTreeNode(None, '$', False)
@@ -56,8 +56,7 @@ class CharTree:
                     fringe.append(child)
             curnode.children = new_children            
 
-
-#graph exploration agent class
+#graph exploration agent
 class ExplorationAgent:
     
     def get_succ(self, cur, adjacency, label_dict):
@@ -108,15 +107,6 @@ class ExplorationAgent:
             for x in w:
                 words.append(x)
         return words
-
-
-# In[7]:
-
-
-import networkx as nx
-import numpy as np
-import matplotlib.pyplot as plt
-import datetime
 
 #tester class
 class Tester:
