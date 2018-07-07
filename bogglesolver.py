@@ -1,3 +1,7 @@
+import numpy as np
+import datetime
+import networkx as nx
+
 #suffix tree node
 class CharTreeNode:
     
@@ -178,9 +182,9 @@ class TestResult:
         tot_score = 0
         for w in words_found:
             num_letters = num_letters+len(w)
-            tot_score = tot_score+self.score(w)
+            tot_score = tot_score+self.score(w, scores)
         self.avg_word_length = num_letters/num_tests
-        self.avg_score = tot_score/len(words_found)
+        self.avg_score = tot_score/num_tests
         self.words = words_found
 
     def score(self, word, scores):
