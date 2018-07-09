@@ -112,12 +112,10 @@ class ExplorationAgent:
                 words.append(x)
         return words
 
-#tester class
-class Tester:
+#square graph class
+class BoggleGraph:
 
-    def __init__(self, data, size):
-        self.size = size  
-        #graph generation
+    def __init__(self, size):
         a = np.arange(size*size).reshape((size,size))
         G=nx.Graph()
         for i in range(0,size*size):
@@ -145,7 +143,16 @@ class Tester:
             for elem in item:
                 adj.append(elem)
             self.adjacency.append(adj)
-            
+
+#tester class
+class Tester:
+
+    def __init__(self, data, size):
+        self.size = size  
+        #graph init
+        G = BoggleGraph(size)
+        self.graph = G
+        self.adjacency = G.adjacency    
         self.posdict = {}
         for i in range (0, size*size):
             self.posdict[i] = [i//size,i%size]
